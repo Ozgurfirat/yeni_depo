@@ -10,11 +10,10 @@ class Ana_ekran:
 
 
 
-
-
     def label_oluştur(self ,ekran_adı ,  yazı , satır ,sütun ):
         self.etiket = tk.Label(ekran_adı , text = yazı , font = self.orta_font )
-        self.etiket.grid()
+        self.etiket.grid(row = satır , column = sütun , padx = 10 , pady = 10)
+        return self.etiket
 
 
 
