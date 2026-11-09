@@ -8,7 +8,8 @@ class Sipariş:
                  gelen_mlz_tonaj = 0 , giden_mlz_tonaj = 0 ,
                  iş_alış_tarihi = "?" , iş_teslim_tarihi = "?",
                  yerel_sorumlu_kişi = "?", yerel_sorumlu_iletişim ="?",
-                 karşı_sorumlu_kişi="?", karşı_sorumlu_iletişim="?"
+                 karşı_sorumlu_kişi="?", karşı_sorumlu_iletişim="?" ,
+                 sipariş_durumu = "Teslim Edilmedi"
                  ):
 
         self.mlz_hammadde = mlz_hammadde
@@ -24,7 +25,7 @@ class Sipariş:
         self.karşı_sorumlu_kişi =karşı_sorumlu_kişi
         self.karşı_sorumlu_iletişim = karşı_sorumlu_iletişim
         self.kuruluş_adı = "Can Metal Endüstri Ltd. Şti."
-
+        self.sipariş_durumu = sipariş_durumu
 
 
 
