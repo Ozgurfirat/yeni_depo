@@ -3,6 +3,8 @@
 class Sipariş:
     index = 0
     sipariş_listesi = []
+    kuruluş_adı = "Can Metal Endüstri Ltd. Şti."
+
     def __init__(self , mlz_hammadde = "?",
                  gelen_mlz_türü = "?" , giden_mlz_türü = "?",
                  gelen_mlz_tonaj = 0 , giden_mlz_tonaj = 0 ,
@@ -24,7 +26,6 @@ class Sipariş:
         self.yerel_sorumlu_iletişim = yerel_sorumlu_iletişim
         self.karşı_sorumlu_kişi =karşı_sorumlu_kişi
         self.karşı_sorumlu_iletişim = karşı_sorumlu_iletişim
-        self.kuruluş_adı = "Can Metal Endüstri Ltd. Şti."
         self.sipariş_durumu = sipariş_durumu
 
 

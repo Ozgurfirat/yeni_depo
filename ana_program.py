@@ -3,7 +3,10 @@ from GUI import *
 from Sipariş_classı import Sipariş
 
 if __name__ == "__main__":
+
+
     Uygulama = Ana_ekran()
+
 
 
 
