@@ -2,7 +2,7 @@ import tkinter as tk
 
 
 class Ana_ekran:
-    def __init__(self):
+    def __init__(self ):
         self.ekran = tk.Tk()
 
 
