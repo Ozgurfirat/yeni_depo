@@ -1,12 +1,16 @@
 import tkinter as tk
-from tokenize import String
+from tkinter import ttk
 
 from Sipariş_classı import Sipariş
 
 class Ana_ekran:
     def __init__(self ):
         self.ekran = tk.Tk()
-        self.ekran.geometry("800x600+450+100")
+        en = self.ekran.winfo_screenwidth()
+        boy = self.ekran.winfo_screenheight()
+
+        self.ekran.geometry(f"{en}x{boy}+0+0")
+
         self.ekran.title("_ _ _ _    Siapriş ve Üretim Takip Otomasyonu    _ _ _ _" )
         self.orta_font = ("Helvetica bold" , 17)
         self.k_font = ("Helvetica italic" ,  15)
@@ -28,6 +32,9 @@ class Ana_ekran:
         self.karşı_kişi_değ = tk.StringVar()
         self.karşı_sorumlu_iletişim_değ = tk.StringVar()
 
+        # combobox listeleri tanımlanıyor
+        self.hammade_listesi = ["Bakır" , "Demir" , "Çelik" , "Aluminyum" , "Galvaniz" , "Krom" , "Siyah Demir"]
+
         # şirket adı yazılyor
         self.firma_adı_label = self.label_oluştur(self.ekran , str(Sipariş.kuruluş_adı) , 0 , 0)
         self.firma_adı_label.grid_configure(columnspan=5 , sticky= tk.EW)
@@ -39,7 +46,10 @@ class Ana_ekran:
         self.gelen_çerçeve.grid(row = 1 , column = 0 , padx = 10 , pady = 10  , ipadx = 10 , ipady = 10)
 
         self.gln_mlz_hmmd_label = self.label_oluştur(self.gelen_çerçeve , "Gelen Malzeme Hammaddesi: " , 0 , 0 )
-        self.gln_mlz_hmmd_giriş = self.giriş_oluştur(self.gelen_çerçeve , self.gln_mlz_hmmd_değ  , 0 ,1)
+        self.gln_mlz_hmmd_combo = ttk.Combobox(self.gelen_çerçeve , values = self.hammade_listesi , textvariable=self.gln_mlz_hmmd_değ, font = self.k_font)
+        self.gln_mlz_hmmd_combo.grid(row = 0 , column = 1 , padx = 10 , pady = 10 , sticky = tk.W)
+
+
         self.gln_mlz_türü_label = self.label_oluştur(self.gelen_çerçeve , "Gelen Malzeme Türü:",1,0)
         self.gln_mlz_türü_giriş = self.giriş_oluştur(self.gelen_çerçeve , self.gln_mlz_türü_değ , 1 , 1)
         self.gln_mlz_tonaj_label = self.label_oluştur(self.gelen_çerçeve , "Gelen Malzeme Tonaj:" , 2 , 0)
@@ -50,25 +60,34 @@ class Ana_ekran:
         self.sorumlu_kişi_giriş = self.giriş_oluştur(self.gelen_çerçeve, self.sorumlu_kişi_değ, 4, 1)
         self.sorumlu_kişi_iletişim_label = self.label_oluştur(self.gelen_çerçeve, "Sorumlu Kişi İletişim:", 5, 0)
         self.sorumlu_kişi_iletişim_giriş = self.giriş_oluştur(self.gelen_çerçeve, self.sorumlu_iletişim_değ , 5 ,  1)
-        self.iş_teslim_durumu_label = self.label_oluştur(self.gelen_çerçeve, "İş Teslim Durumu:", 6, 0)
-        self.iş_devam_rdbtn = tk.Radiobutton(self.gelen_çerçeve , text = "Devam Ediyor" ,  font = self.k_font, variable=self.iş_durumu_değ , value = False)
-        self.iş_devam_rdbtn.grid(row = 6 , column = 1 , padx = 10 , pady = 5 , sticky= tk.W)
-        self.iş_teslim_rdbtn = tk.Radiobutton(self.gelen_çerçeve, text="Teslim Edildi", font=self.k_font, variable=self.iş_durumu_değ, value=True)
-        self.iş_teslim_rdbtn.grid(row=7, column=1, padx=10 ,pady = (0 , 10) , sticky= tk.W)
 
+        # ___________________________________________________________________________________________________________
         # GİDEN MALZEME BİLGİLERİ ÇERÇEVESİ TANIMLANIYOR
         self.giden_çerçeve = tk.LabelFrame(self.ekran, text="Giden Malzeme Bilgileri", labelanchor=tk.N,
                                            font=self.mini_font, bd=3, relief="groove")
         self.giden_çerçeve.grid(row=1, column=1, padx=10, pady=10 , ipadx = 10 , ipady = 10)
 
-        self.gdn_mlz_türü_label = self.label_oluştur(self.giden_çerçeve, "Giden Malzeme Hammaddesi: ", 0, 0)
+        self.gdn_mlz_türü_label = self.label_oluştur(self.giden_çerçeve, "Giden Malzeme Türü: ", 0, 0)
         # buraya COMBOBOX GELECEK
+        self.gdn_mlz_tonaj_label = self.label_oluştur(self.giden_çerçeve, "Giden Malzeme Tonaj: ", 1, 0)
+        self.gdn_mlz_tonaj_giriş = self.giriş_oluştur(self.giden_çerçeve, self.gdn_mlz_tonaj_değ, 1, 1)
 
-        self.gdn_mlz_türü_label = self.label_oluştur(self.giden_çerçeve, "Giden Malzeme Hammaddesi: ", 0, 0)
+        self.iş_teslim_tarihi_label = self.label_oluştur(self.giden_çerçeve, "İş Teslim Tarihi: ", 2, 0)
+        self.iş_teslim_tarihi_giriş = self.giriş_oluştur(self.giden_çerçeve, self.iş_teslim_tarihi_değ, 2 ,  1)
 
+        self.karşı_sorumlu_label = self.label_oluştur(self.giden_çerçeve, "Sorumlu (Karşı Taraf) : ", 3, 0)
+        self.karşı_sorumlu_giriş = self.giriş_oluştur(self.giden_çerçeve, self.karşı_kişi_değ, 3, 1)
 
+        self.karşı_sorumlu_iletişim_label = self.label_oluştur(self.giden_çerçeve, "Sorumlu İletişim : ", 4, 0)
+        self.karşı_sorumlu_iletişim_giriş = self.giriş_oluştur(self.giden_çerçeve, self.karşı_sorumlu_iletişim_değ , 4, 1)
 
-
+        self.iş_teslim_durumu_label = self.label_oluştur(self.giden_çerçeve, "İş Teslim Durumu:", 5, 0)
+        self.iş_devam_rdbtn = tk.Radiobutton(self.giden_çerçeve, text="Devam Ediyor", font=self.k_font,
+                                             variable=self.iş_durumu_değ, value=False)
+        self.iş_devam_rdbtn.grid(row=5, column=1, padx=10, pady=5, sticky=tk.W)
+        self.iş_teslim_rdbtn = tk.Radiobutton(self.giden_çerçeve, text="Teslim Edildi", font=self.k_font,
+                                              variable=self.iş_durumu_değ, value=True)
+        self.iş_teslim_rdbtn.grid(row=6, column=1, padx=10, pady=(0, 10), sticky=tk.W)
 
     # Label Oluşturan Metod
     def label_oluştur(self ,ekran_adı ,  yazı , satır ,sütun ):
@@ -78,8 +97,8 @@ class Ana_ekran:
 
     # Entry leri oluşturan metod
     def giriş_oluştur(self, ekran , değişken,  satır ,sütun ):
-        giriş = tk.Entry(ekran , textvariable= değişken , font = self.k_font )
-        giriş.grid(row = satır , column = sütun , padx =(0 , 10)  , pady = 10)
+        giriş = tk.Entry(ekran , textvariable= değişken , font = self.k_font ,width = 30)
+        giriş.grid(row = satır , column = sütun , padx =(0 , 10)  , pady = 10 )
         return giriş
 
     def tuş_oluştur(self , ekran , yazı , satır , sütun):
