@@ -1,3 +1,4 @@
+import random
 import tkinter as tk
 from SİPARİŞ_CLASSI import Sipariş
 
@@ -35,7 +36,7 @@ class Ana_Ekran:
 # Label oluşturan metod
     def label_oluştur(self , ekran_adı , yazı , satır , sütun):
         etiket = tk.Label(ekran_adı , text = yazı , font = self.orta_font)
-        self.etiket.grid(row = satır , column = sütun , padx=10 , pady=10)
+        etiket.grid(row = satır , column = sütun , padx=10 , pady=10)
         return etiket
 
     def giriş_oluştur(self , ekran_adı , yazı , değişken , satır , sütun):
@@ -46,7 +47,8 @@ class Ana_Ekran:
 
     def tuş_oluştur(self , ekran , yazı  , satır , sütun):
         tuş = tk.Entry( ekran , text = yazı , font = self.orta_font)
-        tuş.grid(row = satır , column = )
+        tuş.grid(row = satır , column = sütun , padx = 10 , pady = 10)
+        return tuş
 
 
     def ekran_döngü(self):
