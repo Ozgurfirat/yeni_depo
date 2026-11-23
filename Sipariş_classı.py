@@ -11,7 +11,6 @@ class Sipariş:
                  iş_alış_tarihi = "?" , iş_teslim_tarihi = "?",
                  yerel_sorumlu_kişi = "?", yerel_sorumlu_iletişim ="?",
                  karşı_sorumlu_kişi="?", karşı_sorumlu_iletişim="?" ,
-                 sipariş_durumu = "Teslim Edilmedi"
                  ):
 
         self.mlz_hammadde = mlz_hammadde
@@ -26,7 +25,7 @@ class Sipariş:
         self.yerel_sorumlu_iletişim = yerel_sorumlu_iletişim
         self.karşı_sorumlu_kişi =karşı_sorumlu_kişi
         self.karşı_sorumlu_iletişim = karşı_sorumlu_iletişim
-        self.sipariş_durumu = sipariş_durumu
-
+        self.sipariş_durumu = False
+        Sipariş.sipariş_listesi.append(self) # her oluşlan siparişi listeye ekle
 
 

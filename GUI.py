@@ -30,19 +30,21 @@ class Ana_ekran:
         self.mini_font = ("Helvetica bold", 13)
 
         # TKİNTER DEĞİŞKENLERİ TANIMLANIYOR
-        self.gln_mlz_hmmd_değ = tk.StringVar()
-        self.gln_mlz_türü_değ = tk.StringVar()
-        self.gln_mlz_tonaj_değ = tk.StringVar()
-        self.iş_alış_tarihi_değ = tk.StringVar()
-        self.sorumlu_kişi_değ = tk.StringVar()
-        self.sorumlu_iletişim_değ = tk.StringVar()
-        self.iş_durumu_değ = tk.BooleanVar()
+        self.değişkenler_listesi = []
+        self.gln_mlz_hmmd_değ = tk.StringVar()     ; self.değişkenler_listesi.append( self.gln_mlz_hmmd_değ)
+        self.gln_mlz_türü_değ = tk.StringVar()     ; self.değişkenler_listesi.append( self.gln_mlz_türü_değ)
+        self.gdn_mlz_türü_değ = tk.StringVar()     ; self.değişkenler_listesi.append(self.gdn_mlz_türü_değ)
+        self.gln_mlz_tonaj_değ = tk.StringVar()    ; self.değişkenler_listesi.append( self.gln_mlz_tonaj_değ)
+        self.gdn_mlz_tonaj_değ = tk.StringVar()    ; self.değişkenler_listesi.append(self.gdn_mlz_tonaj_değ)
+        self.iş_alış_tarihi_değ = tk.StringVar()   ; self.değişkenler_listesi.append( self.iş_alış_tarihi_değ)
+        self.iş_teslim_tarihi_değ = tk.StringVar() ; self.değişkenler_listesi.append(self.iş_teslim_tarihi_değ)
+        self.teslimata_kalan_gün_değ = tk.StringVar();  self.değişkenler_listesi.append(self.teslimata_kalan_gün_değ)
+        self.sorumlu_kişi_değ = tk.StringVar()     ; self.değişkenler_listesi.append( self.sorumlu_kişi_değ)
+        self.sorumlu_iletişim_değ = tk.StringVar() ; self.değişkenler_listesi.append( self.sorumlu_iletişim_değ)
+        self.karşı_kişi_değ = tk.StringVar()        ; self.değişkenler_listesi.append( self.karşı_kişi_değ)
+        self.karşı_sorumlu_iletişim_değ = tk.StringVar() ;self.değişkenler_listesi.append( self.karşı_sorumlu_iletişim_değ)
+        self.iş_durumu_değ = tk.BooleanVar()  # bu değişken bool olduğu için listeye alınmadı
 
-        self.gdn_mlz_türü_değ = tk.StringVar()
-        self.gdn_mlz_tonaj_değ = tk.StringVar()
-        self.iş_teslim_tarihi_değ = tk.StringVar()
-        self.karşı_kişi_değ = tk.StringVar()
-        self.karşı_sorumlu_iletişim_değ = tk.StringVar()
 
         # COMBOBOX LİSTELERİ
         self.hammade_listesi = [
@@ -314,10 +316,12 @@ class Ana_ekran:
         self.geri_tuşu = self.tuş_oluştur(
             tuş_çerçevesi, "◀  Geri", 0, 0
         )
+        self.geri_tuşu.config(command = self.geri)
 
         self.ileri_tuşu = self.tuş_oluştur(
             tuş_çerçevesi, "İleri  ▶", 0, 1
         )
+        self.ileri_tuşu.config(command=self.ileri)
 
         üçlü_çerçeve = tk.Frame(
             tuş_çerçevesi,
@@ -452,3 +456,18 @@ class Ana_ekran:
 
     def ekran_döngü(self):
         self.ekran.mainloop()
+
+    def geri(self):
+        if Sipariş.index > 0 : # index 0 değil ise azalt
+            Sipariş.index -= 1
+            print(Sipariş.index)
+
+    def ileri(self):
+        if Sipariş.index < len(Sipariş.sipariş_listesi) - 1 : # index son elemanın indeksine eşit değil ise arrtır
+            Sipariş.index += 1
+            print(Sipariş.index)
+
+    def sipariş_görüntüle(self):
+        for değişken in self.değişkenler_listesi: #
+            değişken.set("")
+
